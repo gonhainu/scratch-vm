@@ -16,7 +16,7 @@ class Scratch3MaBeee {
     getInfo () {
         return {
             id: 'mabeee',
-            name: 'MaBeee Blocks',
+            name: 'MaBeee',
             blocks: [
                 {
                     opcode: 'setMaBeeeOn',
@@ -200,6 +200,7 @@ class Scratch3MaBeee {
         setTimeout(function() {
             _this.getIdByName(name, function(id) {
                 _this.mabeee.setId(id);
+                console.log("id: " + _this.mabeee.getId());
                 _this.requestMaBeeeAction('devices/' + _this.mabeee.getId() + '/connect');
                 var __this = _this;
                 setTimeout(function() {
@@ -307,7 +308,11 @@ class Scratch3MaBeee {
                 _this.device_names.push(response.data.devices[i].name);
             }
         });
-        return this.device_names;
+        if (this.device_names.length === 0) {
+            return ['MaBeeeなし']
+        } else {
+            return this.device_names;
+        }
     }
 
 
@@ -340,7 +345,7 @@ var MaBeee = function(id, name) {
 
 MaBeee.prototype = {
     setId: function(id) {
-        this.id;
+        this.id = id;
     },
     setName: function(name) {
         this.name = name;
